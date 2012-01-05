@@ -7,7 +7,7 @@ Installation
 ---
 Add a bookmark of this page and modify the bookmark's location/address to the line of code below. You'll only have to do this once and it'll always be up to date.
 
-	javascript:(function(c,a){if(c.location.host.match("video.xin.msn.com")){var b=a.createElement("script");b.src="https://raw.github.com/aidilfbk/xinmsn-flash-player-to-html5-video/master/script.js";try{a.body.appendChild(b)}catch(d){a.getElementsByTagName("body")[0].appendChild(b)}}})(window,document);
+	javascript:(function(c,a){if(c.location.host.match("video.xin.msn.com")){var b=a.createElement("script");b.src="https://github.com/aidilfbk/xinmsn-flash-player-to-html5-video/raw/master/script.js";try{a.body.appendChild(b)}catch(d){a.getElementsByTagName("body")[0].appendChild(b)}}})(window,document);
 
 Usage
 ---
