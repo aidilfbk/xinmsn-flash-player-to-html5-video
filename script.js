@@ -2,14 +2,15 @@
 	if(!window.location.host.match('video.xin.msn.com')) return;
 	
 	var original_vxpPreWait = window.vxpPreWait,
-	scriptCode = document.querySelector('.vxp_richEmbedContainer + script').innerText;
+	scriptCode = document.querySelector('.vxp_richEmbedContainer + script').innerText,
+	mp4Regex = /(.mp4)$/;
 	
 	window.vxpPreWait = function(fn){
 		var obj = {
 			'embedMsnPlayer': function(id, obj, html){
 				if(obj.h264Available){
-					var mp4files = obj.videoData.videoFiles.filter(function(item, index, array){
-						return (item.url.search('.mp4') !== -1);
+					var mp4files = obj.videoData.videoFiles.filter(function(item){
+						return mp4Regex.test(item.url);
 					}),
 					mp4files = mp4files.sort(function(a, b){return (b.bitrate - a.bitrate)});
 
