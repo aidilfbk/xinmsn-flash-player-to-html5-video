@@ -6,13 +6,24 @@
 	mp4Regex = /(.mp4)$/,
 	sourceHTML = function(url){
 		return ['<source src="', url, '" type="video/mp4" />'].join('')
+	},
+	removeSilverlightOverlay: function(embedDiv){
+		// gets rid of "We're sorry, but your browser does not support Silverlight" message overlay
+		if(embedDiv.parentNode.style.display === 'none'){
+			embedDiv.parentNode.style.display = '';
+			document.getElementsByClassName('silverlightInstall')[0].parentNode.style.display = 'none'
+			var stylesheet = document.createElement('style');
+			stylesheet.innerText = '.dimBg{ display:none }';
+			document.getElementsByTagName('body')[0].appendChild(stylesheet)
+		}
 	};
 	
 	window.vxpPreWait = function(fn){
 		var obj = {
 			'embedMsnPlayer': function(id, obj, html){
 				if(obj.h264Available){
-					var mp4files = obj.videoData.videoFiles.filter(function(item){
+					var embedDiv = document.getElementById(id),
+					mp4files = obj.videoData.videoFiles.filter(function(item){
 						return mp4Regex.test(item.url);
 					}),
 					mp4files = mp4files.sort(function(a, b){return (b.bitrate - a.bitrate)}),
@@ -21,7 +32,9 @@
 						this.push(sourceHTML(element.url))
 					}, html);
 					html.push('</video>')
-					document.getElementById(id).innerHTML = html.join('');
+					embedDiv.innerHTML = html.join('');
+					
+					removeSilverlightOverlay(embedDiv)
 				};
 			},
 		};
