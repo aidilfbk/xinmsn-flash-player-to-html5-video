@@ -7,7 +7,7 @@
 	sourceHTML = function(url){
 		return ['<source src="', url, '" type="video/mp4" />'].join('')
 	},
-	removeSilverlightOverlay: function(embedDiv){
+	removeSilverlightOverlay = function(embedDiv){
 		// gets rid of "We're sorry, but your browser does not support Silverlight" message overlay
 		if(embedDiv.parentNode.style.display === 'none'){
 			embedDiv.parentNode.style.display = '';
